@@ -19,10 +19,10 @@ header {
     text-align: center;
 }
 
-header h1 {
+h1 {
     margin-top: 8%;
     font-size: 6.0vw;
-
+    color: #EAEAF4;
 }
 
 form {
@@ -33,22 +33,11 @@ form {
     align-items: center; 
     height: 50%;
     justify-content: space-evenly;
-
 }
 
-div {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    
-    /* align-items: flex-end; */
-}
-
-
-form label {
+label {
     margin: 1;
     display: flex;
-    
     flex-direction: row;
     align-items: center;
     width: 75%;
@@ -57,20 +46,19 @@ form label {
     margin-right: 8%;
 }
 
-
 input[type="text"] {
     border: solid 3px #1F1F3C ;
     width: 100%;
     height: 100%;
     margin: 1%;
-    
 }
+
 textarea {
     border: solid 3px #1F1F3C ;
     width: 100%;
-    height: 200%;
+    height: 175%;
     margin: 1%;
-    resize:none;
+    resize: none; /*what is this? */
 }
 
 #save-button {
@@ -83,23 +71,7 @@ textarea {
     height: 20%;
 
 }
+
 #submitted-title{
     margin-left: 2%;
-}
-
-
-/* div {
-    display: table-row;
-}
-
-label {
-    display: table-cell;
-}
-
-input {
-    display: table
-} */
-
-h1 {
-    color: #EAEAF4;
 }
