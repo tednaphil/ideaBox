@@ -22,6 +22,7 @@ form {
     display: table;
     display: flex;
     flex-direction: column;
+    border: black
     /* align-items: center; */
     height: 50%; */
 }
