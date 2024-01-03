@@ -14,6 +14,7 @@ main {
 
 header {
     background-color: #1F1F3C;
+    width: 35%;
 }
 
 form {
@@ -21,14 +22,24 @@ form {
     display: table;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    height: 50%; */
 }
 
 div {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    /* align-items: flex-end; */
 }
+
+input {
+    width: 70%;
+}
+
+#submitted-body {
+    height: 
+}
+
 
 
 /* div {
