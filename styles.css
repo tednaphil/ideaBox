@@ -15,16 +15,23 @@ main {
 header {
     background-color: #1F1F3C;
     width: 35%;
+    text-align: center;
+}
+
+header h1 {
+    margin-top: 8%;
+    font-size: 6.0vw;
+
 }
 
 form {
     background-color: #A8AAD2;
+    color: #1F1F3C;
     display: table;
     display: flex;
     flex-direction: column;
-    border: black
     /* align-items: center; */
-    height: 50%; */
+    height: 50%;
 }
 
 div {
@@ -33,12 +40,27 @@ div {
     /* align-items: flex-end; */
 }
 
-input {
-    width: 70%;
+
+div label {
+    margin: 1%
 }
 
-#submitted-body {
-    height: 
+
+div input {
+    border: solid 3px #1F1F3C ;
+    width: 70%;
+    height: 100%;
+    margin: 1%
+}
+
+#save-button {
+    background-color: #1F1F3C;
+    color: #EAEAF4;
+    font-size: x-large;
+    padding: 2%;
+    margin: 10px;
+    border: none;
+
 }
 
 
