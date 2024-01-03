@@ -6,6 +6,7 @@
 body {
     display: flex;
     background-color: #EAEAF4;
+    margin: 0;
 }
 
 main {
@@ -27,30 +28,49 @@ header h1 {
 form {
     background-color: #A8AAD2;
     color: #1F1F3C;
-    display: table;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center; 
     height: 50%;
+    justify-content: space-evenly;
+
 }
 
 div {
     display: flex;
     flex-direction: column;
+    width: 60%;
+    
     /* align-items: flex-end; */
 }
 
 
-div label {
-    margin: 1%
+form label {
+    margin: 1;
+    display: flex;
+    
+    flex-direction: row;
+    align-items: center;
+    width: 75%;
+    font-size: x-large  ;
+    font-weight: 500;
+    margin-right: 8%;
 }
 
 
-div input {
+input[type="text"] {
     border: solid 3px #1F1F3C ;
-    width: 70%;
+    width: 100%;
     height: 100%;
-    margin: 1%
+    margin: 1%;
+    
+}
+textarea {
+    border: solid 3px #1F1F3C ;
+    width: 100%;
+    height: 200%;
+    margin: 1%;
+    resize:none;
 }
 
 #save-button {
@@ -58,11 +78,14 @@ div input {
     color: #EAEAF4;
     font-size: x-large;
     padding: 2%;
-    margin: 10px;
     border: none;
+    width: 70%;
+    height: 20%;
 
 }
-
+#submitted-title{
+    margin-left: 2%;
+}
 
 
 /* div {
