@@ -8,23 +8,31 @@ var backArrow = document.querySelector('#back-arrow');
 saveButton.addEventListener('click', storeIdea);
 nextArrow.addEventListener('click', nextIdea);
 backArrow.addEventListener('click', prevIdea);
+ideaGrid.addEventListener('click', function(event) {
+    if (event.target.className.includes('delete-button')){
+        var cardId = event.target.parentElement.id;
+        deleteCard(cardId);
+    }
+});
 
 var ideas = [];
 var currentShift = 0;
 
 function storeIdea(event) {
-    var html = `<div class="card" id="${Date.now()}">
-    <div class="delete-box">
+    var html = `<div class="card">
+    <div class="delete-box" id="${Date.now()}">
         <button class="delete-button">X</button>
     </div>
     <h2 class="card-title">${titleField.value}</h2>
     <p class="card-body">${bodyField.value}</p>
-  </div>`
+    </div>`
     ideas.push(html);
     console.log(html);
     event.preventDefault();
-    displayIdeas(0)
+    displayIdeas(0);
+    //what is this line above?
 }
+
 function displayIdeas (){
     ideaGrid.innerHTML = ""
     for(var i = 0; i <ideas.length ; i++){
@@ -41,17 +49,30 @@ function displayIdeas (){
     if(currentShift > 0){
         backArrow.classList.remove("hidden")
     }else if (currentShift == 0){
+        //can we get rid of loosely equals?
         backArrow.classList.add("hidden")
     }
    
     console.log(currentShift)
     console.log(ideas.length)
-}
+};
+
 function nextIdea(){
-    currentShift ++
-    displayIdeas ()
-}
+    currentShift ++;
+    displayIdeas();
+};
+
 function prevIdea(){
-    currentShift -- 
-    displayIdeas ()
-}   
+    currentShift --;
+    displayIdeas();
+};
+
+function deleteCard (iD) {
+    for (i = 0; i < ideas.length; i++) {
+        console.log(`we made it here ${i} times`)
+        if (ideas[i].includes(iD)) {
+            ideas.splice(i, 1);
+            displayIdeas();
+        }
+    }
+}
