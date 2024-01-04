@@ -62,7 +62,7 @@ textarea {
     resize: none;
 }
 
-#save-button {
+.save-button {
     background-color: #1F1F3C;
     color: #EAEAF4;
     font-size: x-large;
@@ -164,4 +164,8 @@ textarea {
 
 .clickables {
     cursor: pointer;
+}
+
+.grey-out {
+    background-color: grey;
 }
