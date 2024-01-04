@@ -102,7 +102,6 @@ textarea {
 
   .button-bar-icons {
     height: 45px
-
   }
   
   .card-title {
@@ -113,4 +112,8 @@ textarea {
   
   .card-body {
     font-weight: 100;
+  }
+
+  .hidden {
+    display: none;
   }
