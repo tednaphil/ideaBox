@@ -5,7 +5,10 @@ var ideaGrid = document.querySelector('#card-display');
 var nextArrow = document.querySelector('#next-arrow');
 var backArrow = document.querySelector('#back-arrow');
 
-saveButton.addEventListener('click', storeIdea);
+saveButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    handleSave();
+});
 nextArrow.addEventListener('click', nextIdea);
 backArrow.addEventListener('click', prevIdea);
 ideaGrid.addEventListener('click', function(event) {
@@ -18,7 +21,8 @@ ideaGrid.addEventListener('click', function(event) {
 var ideas = [];
 var currentShift = 0;
 
-function storeIdea(event) {
+function storeIdea() {
+    console.log(`prepush array: `, ideas)
     var newIdea = {
         title: titleField.value,
         body: bodyField.value,
@@ -26,21 +30,27 @@ function storeIdea(event) {
     }
     ideas.push(newIdea);
     // console.log(html);
-    event.preventDefault();
-    displayIdeas(0);
     //what is this line above?
-    titleField.value = '';
-    bodyField.value = '';
-}
+    console.log('postpush array: ', ideas)
+   
+};
 
-function displayIdeas (){
+function displayIdeas() {
     ideaGrid.innerHTML = ""
     for (var i = 0; i <ideas.length ; i++) {
-        if(i<3){
-        ideaGrid.innerHTML += ideas[i + currentShift]
+        if (i < 3) {
+            ideaGrid.innerHTML +=
+            `<div class="card">
+                <div class="delete-box" id="${ideas[i + currentShift].id}">
+                    <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
+                </div>
+                <h2 class="card-title">${ideas[i + currentShift].title}</h2>
+                <p class="card-body">${ideas[i + currentShift].body}</p>
+            </div>`
         }
     }
     if (ideas.length > 3){
+        // currentShift++
         nextArrow.classList.remove("hidden")
         nextArrow.classList.add("fade")
     }
@@ -56,10 +66,23 @@ function displayIdeas (){
         backArrow.classList.add("hidden")
         backArrow.classList.remove("fade")
     }
-   
+//    event.preventDefault();
     // console.log(currentShift)
     // console.log(ideas.length)
 };
+
+function clearInput() {
+    titleField.value = '';
+    bodyField.value = '';
+    // event.preventDefault();
+};
+
+function handleSave() {
+    console.log(`handleSave function`);
+    storeIdea();
+    displayIdeas();
+    clearInput();
+}
 
 function nextIdea() {
     currentShift ++;
