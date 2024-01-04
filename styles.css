@@ -91,7 +91,18 @@ textarea {
     font-size: large;
     color: #1F1F3C;
     grid-row-end: span 2;
-    margin-bottom: 70px
+    margin-bottom: 50px
+  }
+
+  .button-bar {
+    background-color: #1F1F3C;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .button-bar-icons {
+    height: 45px
+
   }
   
   .card-title {
