@@ -19,14 +19,12 @@ var ideas = [];
 var currentShift = 0;
 
 function storeIdea(event) {
-    var html = `<div class="card">
-    <div class="delete-box" id="${Date.now()}">
-        <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
-    </div>
-    <h2 class="card-title">${titleField.value}</h2>
-    <p class="card-body">${bodyField.value}</p>
-    </div>`
-    ideas.push(html);
+    var newIdea = {
+        title: titleField.value,
+        body: bodyField.value,
+        id: Date.now()
+    }
+    ideas.push(newIdea);
     // console.log(html);
     event.preventDefault();
     displayIdeas(0);
