@@ -7,7 +7,6 @@ saveButton.addEventListener('click', storeIdea);
 var ideas = [];
 
 function storeIdea(event) {
-    console.log("I made it here!")
     var newIdea = {
         title: titleField.value,
         body: bodyField.value,
