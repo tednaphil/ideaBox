@@ -1,17 +1,22 @@
 var titleField = document.querySelector('#submitted-title');
 var bodyField = document.querySelector('#submitted-body');
 var saveButton = document.querySelector('#save-button');
-var ideaGrid = document.querySelector(`#card-display`);
-var nextArrow = document.querySelector(`#next-arrow`);
-var backArrow = document.querySelector(`#back-arrow`);
+var ideaGrid = document.querySelector('#card-display');
+var nextArrow = document.querySelector('#next-arrow');
+var backArrow = document.querySelector('#back-arrow');
 
 saveButton.addEventListener('click', storeIdea);
 nextArrow.addEventListener('click', nextIdea);
 backArrow.addEventListener('click', prevIdea);
+
 var ideas = [];
-var currentShift = 0
+var currentShift = 0;
+
 function storeIdea(event) {
     var html = `<div class="card" id="${Date.now()}">
+    <div class="delete-box">
+        <button class="delete-button">X</button>
+    </div>
     <h2 class="card-title">${titleField.value}</h2>
     <p class="card-body">${bodyField.value}</p>
   </div>`
