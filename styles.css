@@ -71,3 +71,41 @@ textarea {
     width: 90%;
     height: 100%;
 }
+.card {
+    background-color: white;
+    border: solid 3px #1F1F3C;
+    text-align: center;
+    font-size: x-large;
+    color: #1F1F3C;
+    grid-row-end: span 2;
+    margin-bottom: 70px;
+    width: 80%;
+    height: 100%;
+  }
+  
+  .card-title {
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin-top: 30px;
+  }
+  
+  .card-body {
+    font-weight: 100;
+  }
+#card-display{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 190px;
+    grid-gap: 40px;
+    padding: 20px;
+    height:50%;
+    margin-bottom: 20px
+  /*  add scroll feature  */
+  }
+  .hidden{
+    display: none;
+  }
+#arrows {
+    width: 50px;
+    position: absolute;
+} 
