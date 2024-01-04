@@ -89,12 +89,18 @@ textarea {
     height: 20%;
     background-color: #1F1F3C;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* will need to change to space-between when fav icon added */
 }
 
 .delete-button {
     height:95%;
 }
+
+/* can add a fav-button class for the fav icon or can reclassify delete-button and delete-box to apply to all buttons in "icon bar" */
+
+/* .fav-button {
+    height:95%
+} */
   
 .card-title {
     letter-spacing: 1px;
@@ -116,7 +122,6 @@ textarea {
     width: 90%;
     margin-bottom: 20px;
     justify-items: center;
-  /*  add scroll feature  */
 }
 
 #card-area {
