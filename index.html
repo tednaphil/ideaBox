@@ -1,29 +1,38 @@
 <html lang="en-US">
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <link href="https://fonts.google.com/specimen/Poppins?query=poppins" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <h1>IdeaBox</h1>
-        </header>
-        <main>
-            <form class="idea-form">
-                <div class="form-field">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="submitted-title">
-                </div>
-                <div class="form-field">
-                    <label for="body">Body</label>
-                    <textarea type="text" name="body" id="submitted-body"></textarea>
-                </div>
-                <div class="form-field"> 
-                    <input type="submit" value="Save" id="save-button">
-                </div>
-            </form>
-        </main>
-    </body>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.google.com/specimen/Poppins?query=poppins"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>IdeaBox</h1>
+    </header>
+    <main>
+      <form class="idea-form">
+        <div class="form-field">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="submitted-title" />
+        </div>
+        <div class="form-field">
+          <label for="body">Body</label>
+          <textarea type="text" name="body" id="submitted-body"></textarea>
+        </div>
+        <div class="form-field">
+          <input type="submit" class="clickables grey-out save-button" value="Save" id="save-button" />
+        </div>
+      </form>
+      <div id="card-area">
+        <img class = "arrow hidden fade" id="back-arrow" src="assets/left-arrow.svg" alt="back arrow" />   
+        <section id="card-display">
+          <!-- cards will be displayed here -->
+        </section>
+        <img class = "arrow hidden" id="next-arrow" src="assets/right-arrow.svg" alt="next arrow" />
+      </div>  
+    </main>
+  </body>
 
-
-    <script src="main.js"></script>
+  <script src="main.js"></script>
 </html>

@@ -62,7 +62,7 @@ textarea {
     resize: none;
 }
 
-#save-button {
+.save-button {
     background-color: #1F1F3C;
     color: #EAEAF4;
     font-size: x-large;
@@ -70,4 +70,103 @@ textarea {
     border: none;
     width: 90%;
     height: 100%;
+}
+.card {
+    background-color: white;
+    border: solid 3px #1F1F3C;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: x-large;
+    color: #1F1F3C;
+    grid-row-end: span 2;
+    margin-bottom: 70px;
+    width: 80%;
+    height: 100%;
+}
+
+.delete-box {
+    height: 20%;
+    background-color: #1F1F3C;
+    display: flex;
+    justify-content: flex-end; /* will need to change to space-between when fav icon added */
+}
+
+.delete-button {
+    height:95%;
+}
+
+/* can add a fav-button class for the fav icon or can reclassify delete-button and delete-box to apply to all buttons in "icon bar" */
+
+/* .fav-button {
+    height:95%
+} */
+  
+.card-title {
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin-top: 30px;
+}
+  
+.card-body {
+    font-weight: 100;
+}
+
+#card-display{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 190px;
+    grid-gap: 20px;
+    padding: 20px 0%;
+    height: 50%;
+    width: 90%;
+    margin-bottom: 20px;
+    justify-items: center;
+}
+
+#card-area {
+    display: flex;
+    justify-content: space-around;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.arrow {
+    width: 20px;
+    opacity: .5;
+}
+
+.fade {
+    animation: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+#back-arrow {
+    margin-left: 2%;
+}
+
+#next-arrow {
+    margin-right: 2%;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+
+}
+
+.clickables {
+    cursor: pointer;
+}
+
+.grey-out {
+    background-color: grey;
+    cursor: default;
 }
