@@ -9,7 +9,7 @@ saveButton.addEventListener('click', storeIdea);
 nextArrow.addEventListener('click', nextIdea);
 backArrow.addEventListener('click', prevIdea);
 ideaGrid.addEventListener('click', function(event) {
-    if (event.target.className.includes('delete-button')){
+    if (event.target.className.includes('delete-button')) {
         var cardId = event.target.parentElement.id;
         deleteCard(cardId);
     }
@@ -21,7 +21,7 @@ var currentShift = 0;
 function storeIdea(event) {
     var html = `<div class="card">
     <div class="delete-box" id="${Date.now()}">
-        <button class="delete-button">X</button>
+        <button class="delete-button clickables">X</button>
     </div>
     <h2 class="card-title">${titleField.value}</h2>
     <p class="card-body">${bodyField.value}</p>
@@ -35,34 +35,38 @@ function storeIdea(event) {
 
 function displayIdeas (){
     ideaGrid.innerHTML = ""
-    for(var i = 0; i <ideas.length ; i++){
+    for (var i = 0; i <ideas.length ; i++) {
         if(i<3){
         ideaGrid.innerHTML += ideas[i + currentShift]
         }
     }
-    if(ideas.length > 3){
+    if (ideas.length > 3){
         nextArrow.classList.remove("hidden")
+        nextArrow.classList.add("fade")
     }
     if (ideas.length - currentShift < 4){ // this just checks if you go to the next one that it wont be yk undefinte 
         nextArrow.classList.add("hidden")
+        nextArrow.classList.remove("fade")
     }
-    if(currentShift > 0){
+    if (currentShift > 0){
         backArrow.classList.remove("hidden")
-    }else if (currentShift == 0){
+        backArrow.classList.add("fade")
+    } else if (currentShift == 0){
         //can we get rid of loosely equals?
         backArrow.classList.add("hidden")
+        backArrow.classList.remove("fade")
     }
    
     console.log(currentShift)
     console.log(ideas.length)
 };
 
-function nextIdea(){
+function nextIdea() {
     currentShift ++;
     displayIdeas();
 };
 
-function prevIdea(){
+function prevIdea() {
     currentShift --;
     displayIdeas();
 };

@@ -137,7 +137,13 @@ textarea {
 
 .arrow {
     width: 20px;
-    opacity: 50%;
+    opacity: .5;
+}
+
+.fade {
+    animation: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
 }
 
 #back-arrow {
@@ -146,4 +152,18 @@ textarea {
 
 #next-arrow {
     margin-right: 2%;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+
+}
+
+.clickables {
+    cursor: pointer;
 }
