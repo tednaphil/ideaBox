@@ -43,20 +43,24 @@ function displayIdeas (){
         }
     }
     if (ideas.length > 3){
+        nextArrow.classList.remove("fadeOut")
         nextArrow.classList.remove("hidden")
-        nextArrow.classList.add("fade")
+        nextArrow.classList.add("fadeIn")
     }
     if (ideas.length - currentShift < 4){ // this just checks if you go to the next one that it wont be yk undefinte 
-        nextArrow.classList.add("hidden")
-        nextArrow.classList.remove("fade")
+        backArrow.classList.remove("fadeIn") 
+        nextArrow.classList.add("fadeOut")
+        setTimeout(function() {nextArrow.classList.add("hidden")}, 750);
     }
     if (currentShift > 0){
+        backArrow.classList.remove("fadeOut")
         backArrow.classList.remove("hidden")
-        backArrow.classList.add("fade")
+        backArrow.classList.add("fadeIn")
     } else if (currentShift == 0){
         //can we get rid of loosely equals?
-        backArrow.classList.add("hidden")
-        backArrow.classList.remove("fade")
+        backArrow.classList.remove("fadeIn")
+        backArrow.classList.add("fadeOut")
+        setTimeout(function() {backArrow.classList.add("hidden")}, 750);
     }
    
     console.log(currentShift)
