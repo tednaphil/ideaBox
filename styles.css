@@ -168,4 +168,5 @@ textarea {
 
 .grey-out {
     background-color: grey;
+    cursor: default;
 }
