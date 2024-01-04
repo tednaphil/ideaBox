@@ -31,6 +31,8 @@ function storeIdea(event) {
     event.preventDefault();
     displayIdeas(0);
     //what is this line above?
+    titleField.value = '';
+    bodyField.value = '';
 }
 
 function displayIdeas (){
