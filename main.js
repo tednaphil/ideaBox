@@ -1,6 +1,6 @@
 var titleField = document.querySelector('#submitted-title');
 var bodyField = document.querySelector('#submitted-body');
-var saveButton = document.querySelector('#save-button');
+var saveButton = document.querySelector('.save-button');
 var ideaGrid = document.querySelector('#card-display');
 var nextArrow = document.querySelector('#next-arrow');
 var backArrow = document.querySelector('#back-arrow');
@@ -17,9 +17,19 @@ ideaGrid.addEventListener('click', function(event) {
         deleteCard(cardId);
     }
 });
+titleField.addEventListener('input', checkFields);
+bodyField.addEventListener('input', checkFields);
 
+saveButton.disabled = true;
 var ideas = [];
 var currentShift = 0;
+
+function checkFields() {
+    if (titleField.value && bodyField.value) {
+        saveButton.disabled = false
+        saveButton.classList.remove(`grey-out`)
+    }
+}
 
 function storeIdea() {
     console.log(`prepush array: `, ideas)
