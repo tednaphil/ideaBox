@@ -26,10 +26,13 @@ var currentShift = 0;
 
 function checkFields() {
     if (titleField.value && bodyField.value) {
-        saveButton.disabled = false
-        saveButton.classList.remove(`grey-out`)
+        saveButton.disabled = false;
+        saveButton.classList.remove(`grey-out`);
+    } else {
+        saveButton.classList.add('grey-out');
+        saveButton.disabled = true;
     }
-}
+};
 
 function storeIdea() {
     console.log(`prepush array: `, ideas)
