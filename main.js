@@ -16,20 +16,22 @@ ideaGrid.addEventListener("click", function (event) {
     var cardId = event.target.parentElement.id;
     deleteCard(cardId);
   }
-});
+})
 ideaGrid.addEventListener("click", function (event) {
   if (event.target.className.includes("fav-button")) {
     var cardId = event.target.parentElement.id;  
     toggleStar(cardId)
 }
-});
+})
 titleField.addEventListener("input", checkFields);
 bodyField.addEventListener("input", checkFields);
 
 saveButton.disabled = true;
+
 var ideas = [];
 var currentShift = 0;
 var favorites = [];
+
 function checkFields() {
   if (titleField.value && bodyField.value) {
     saveButton.disabled = false;
@@ -41,17 +43,13 @@ function checkFields() {
 }
 
 function storeIdea() {
-  console.log(`prepush array: `, ideas);
   var newIdea = {
     title: titleField.value,
     body: bodyField.value,
     id: Date.now(),
-    isStarred: false,
+    isFavorite: false,
   };
   ideas.push(newIdea);
-  // console.log(html);
-  //what is this line above?
-  console.log("postpush array: ", ideas);
 }
 
 function displayIdeas() {
@@ -70,37 +68,29 @@ function displayIdeas() {
     }
   }
   if (ideas.length > 3) {
-    // currentShift++
     nextArrow.classList.remove("hidden");
     nextArrow.classList.add("fade");
   }
   if (ideas.length - currentShift < 4) {
-    // this just checks if you go to the next one that it wont be yk undefinte
     nextArrow.classList.add("hidden");
     nextArrow.classList.remove("fade");
   }
   if (currentShift > 0) {
     backArrow.classList.remove("hidden");
     backArrow.classList.add("fade");
-  } else if (currentShift == 0) {
-    //can we get rid of loosely equals?
+  } else if (currentShift === 0) {
     backArrow.classList.add("hidden");
     backArrow.classList.remove("fade");
   }
-  //    event.preventDefault();
-  // console.log(currentShift)
-  // console.log(ideas.length)
 }
 
 function clearInput() {
   titleField.value = "";
   bodyField.value = "";
   checkFields();
-  // event.preventDefault();
 }
 
 function handleSave() {
-  console.log(`handleSave`);
   storeIdea();
   displayIdeas();
   clearInput();
@@ -118,14 +108,9 @@ function prevIdea() {
 
 function deleteCard(iD) {
   iD = Number(iD);
-  console.log(`transformed argment: `, iD);
   for (i = 0; i < ideas.length; i++) {
-    console.log(`we made it here ${i} times`);
-    console.log(ideas[i].id);
-    console.log("id argument:", iD);
     if (ideas[i].id === iD) {
       ideas.splice(i, 1);
-      console.log(`ideas array after deletion: `, ideas);
       displayIdeas();
     }
   }
@@ -133,5 +118,26 @@ function deleteCard(iD) {
 
 function toggleStar(iD) {
     iD = Number(iD);
+}
 
+function addToFavs(iD) {
+//access the idea object with the parent id of the star clicked
+iD = Number(iD);  
+for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].id === iD) {
+      ideas[i].isFavorite = true;
+      favorites.push(ideas[i]);
+    }
+  }
+}
+
+function removeFromFavs(iD) {
+//access the idea object with the parent id of the star clicked
+iD = Number(iD);  
+for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].id === iD) {
+      ideas[i].isFavorite = false;
+      favorites.splice(ideas[i, 1]);
+    }
+  }
 }
