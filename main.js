@@ -78,7 +78,7 @@ function clearInput() {
 };
 
 function handleSave() {
-    console.log(`handleSave function`);
+    console.log(`handleSave`);
     storeIdea();
     displayIdeas();
     clearInput();
@@ -95,9 +95,13 @@ function prevIdea() {
 };
 
 function deleteCard (iD) {
+    iD = Number(iD)
+    console.log(`transformed argment: `, iD)
     for (i = 0; i < ideas.length; i++) {
-        // console.log(`we made it here ${i} times`)
-        if (ideas[i].includes(iD)) {
+        console.log(`we made it here ${i} times`)
+        console.log(ideas[i].id)
+        console.log('id argument:', iD)
+        if (ideas[i].id === iD) {
             ideas.splice(i, 1);
             console.log(`ideas array after deletion: `, ideas)
             displayIdeas();
