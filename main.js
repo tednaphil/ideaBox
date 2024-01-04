@@ -27,7 +27,7 @@ function storeIdea(event) {
     <p class="card-body">${bodyField.value}</p>
     </div>`
     ideas.push(html);
-    console.log(html);
+    // console.log(html);
     event.preventDefault();
     displayIdeas(0);
     //what is this line above?
@@ -59,8 +59,8 @@ function displayIdeas (){
         backArrow.classList.remove("fade")
     }
    
-    console.log(currentShift)
-    console.log(ideas.length)
+    // console.log(currentShift)
+    // console.log(ideas.length)
 };
 
 function nextIdea() {
@@ -75,9 +75,10 @@ function prevIdea() {
 
 function deleteCard (iD) {
     for (i = 0; i < ideas.length; i++) {
-        console.log(`we made it here ${i} times`)
+        // console.log(`we made it here ${i} times`)
         if (ideas[i].includes(iD)) {
             ideas.splice(i, 1);
+            console.log(`ideas array after deletion: `, ideas)
             displayIdeas();
         }
     }
