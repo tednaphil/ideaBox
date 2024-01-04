@@ -11,10 +11,6 @@
       <h1>IdeaBox</h1>
     </header>
     <main>
-        <section id = "arrows">
-            <img class = "hidden" id="next-arrow" src="assets/right-arrow.svg" alt="next arrow" />
-            <img class = "hidden" id="back-arrow" src="assets/left-arrow.svg" alt="back arrow" />
-          </section>
       <form class="idea-form">
         <div class="form-field">
           <label for="title">Title</label>
@@ -28,10 +24,13 @@
           <input type="submit" value="Save" id="save-button" />
         </div>
       </form>
-      <section id="card-display">
-
-      </section>
-
+      <div id="card-area">
+        <img class = "arrow hidden" id="back-arrow" src="assets/left-arrow.svg" alt="back arrow" />   
+        <section id="card-display">
+          <!-- cards will be displayed here -->
+        </section>
+        <img class = "arrow hidden" id="next-arrow" src="assets/right-arrow.svg" alt="next arrow" />
+      </div>  
     </main>
   </body>
 
