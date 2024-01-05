@@ -123,18 +123,18 @@ function toggleStar(starId, cardId) {
 }
 
 function updateFavs(cardId) {
-//access the idea object with the parent id of the star clicked
 iD = Number(cardId);  
 console.log(`updateFavs`)
 for (var i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
-      ideas[i].isFavorite = true;
-      favorites.push(ideas[i]);
+      if (ideas[i].isFavorite) {
+        ideas[i].isFavorite = false;
+        favorites.splice(i, 1)
+      } else {
+        ideas[i].isFavorite = true;
+        favorites.push(ideas[i])
+      }
     }
-    // if (ideas[i].id === iD && ideas[i].isFavorite === true) {
-    //   ideas[i].isFavorite = false;
-    //   favorites.splice(i, 1)
-    // }
   }
   console.log(`favs list: `, favorites)
 }
