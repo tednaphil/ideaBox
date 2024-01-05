@@ -22,7 +22,7 @@ ideaGrid.addEventListener("click", function (event) {
     var cardId = event.target.parentElement.id;
     var starId = event.target.id;
     updateFavs(cardId);  
-    toggleStar(starId, cardId);
+    toggleStar(starId);
 }
 })
 titleField.addEventListener("input", checkFields);
@@ -60,7 +60,7 @@ function displayIdeas() {
     if (i < 3) {
       ideaGrid.innerHTML += `<div class="card">
                 <div class="delete-box" id="${ideas[i + currentShift].id}">
-                    <img class = "fav-button clickables default" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
+                    <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
                     <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
                 </div>
                 <h2 class="card-title">${ideas[i + currentShift].title}</h2>
@@ -142,17 +142,15 @@ function toggleStar(starId) {
   console.log(starId)
   var starIcon = document.getElementById(starId)
   // console.log(`clicked star element`, starIcon)
-    // console.log(starIcon.src)
-    // console.log(starIcon.src.includes("assets/star.svg"))
+  // console.log(starIcon.src)
+  // console.log(`defult icon displayed`, starIcon.src.includes("assets/star.svg"))
     if ((starIcon.src.includes("assets/star.svg"))) {
       starIcon.src = "assets/star-active.svg"
-      // starIcon.classList.add('active-icon')
-      // starIcon.classList.remove('default')
     } else if ((starIcon.src.includes("assets/star-active.svg"))) {
       starIcon.src = "assets/star.svg"
     }
-    console.log(starIcon.src)
-    console.log(`is active icon displayed`, starIcon.src.includes("assets/star-active.svg"))
+    // console.log(starIcon.src)
+    console.log(`active icon displayed`, starIcon.src.includes("assets/star-active.svg"))
     }
 
 
