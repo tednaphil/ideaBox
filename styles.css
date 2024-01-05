@@ -167,3 +167,12 @@ textarea {
 .inactive{
     display:none;
 }
+#filter{
+    border: none;
+    width: 90%;
+    height: 8%;
+    font-size: x-large;
+    background-color:#a8aad2 ;
+    color:#1f1f3c;
+    font-weight: bold;
+}

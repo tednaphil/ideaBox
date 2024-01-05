@@ -4,6 +4,7 @@ var saveButton = document.querySelector(".save-button");
 var ideaGrid = document.querySelector("#card-display");
 var nextArrow = document.querySelector("#next-arrow");
 var backArrow = document.querySelector("#back-arrow");
+var filterButton = document.querySelector("#filter");
 
 saveButton.addEventListener("click", function (event) {
   event.preventDefault();
@@ -16,23 +17,24 @@ ideaGrid.addEventListener("click", function (event) {
     var cardId = event.target.parentElement.id;
     deleteCard(cardId);
   }
-})
+});
 ideaGrid.addEventListener("click", function (event) {
   if (event.target.className.includes("fav-button")) {
     var cardId = event.target.parentElement.id;
     var starId = event.target.id;
-    updateFavs(cardId);  
+    updateFavs(cardId);
     toggleStar(starId);
-}
-})
+  }
+});
 titleField.addEventListener("input", checkFields);
 bodyField.addEventListener("input", checkFields);
-
+filterButton.addEventListener("click", filterIdeas);
 saveButton.disabled = true;
 
 var ideas = [];
 var currentShift = 0;
 var favorites = [];
+var filter = false;
 
 function checkFields() {
   if (titleField.value && bodyField.value) {
@@ -54,27 +56,25 @@ function storeIdea() {
   ideas.push(newIdea);
 }
 
-function displayIdeas() {
+function displayIdeas(filter) {
   ideaGrid.innerHTML = "";
+  console.log("i work 1");
   for (var i = 0; i < ideas.length; i++) {
-    var favorite = "assets/star.svg"
-    var stared = "Unstarred"
+    var favorite = "assets/star.svg";
+    var stared = "Unstarred";
     if (i < 3) {
-        
-        if(ideas[i+currentShift].isFavorite){
-           favorite = "assets/star-active.svg"
-           stared = "Starred"
-
+      console.log("i work 2 ");
+      if (ideas[i + currentShift].isFavorite) {
+        favorite = "assets/star-active.svg";
+        stared = "Starred";
+      }
+      if (filter) {
+        if (ideas[i + currentShift].isFavorite) {
+          updatehtml(i, favorite, stared);
         }
-        
-      ideaGrid.innerHTML += `<div class="card">
-                <div class="delete-box" id="${ideas[i + currentShift].id}">
-                    <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "${favorite}" alt = "${stared}">
-                    <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
-                </div>
-                <h2 class="card-title">${ideas[i + currentShift].title}</h2>
-                <p class="card-body">${ideas[i + currentShift].body}</p>
-            </div>`;
+      } else {
+        updatehtml(i, favorite, stared);
+      }
     }
   }
   if (ideas.length > 3) {
@@ -132,35 +132,58 @@ function deleteCard(iD) {
 }
 
 function updateFavs(cardId) {
-  iD = Number(cardId);  
+  iD = Number(cardId);
   for (var i = 0; i < ideas.length; i++) {
-      if (ideas[i].id === iD) {
-        if (ideas[i].isFavorite) {
-          ideas[i].isFavorite = false;
-          favorites.splice(i, 1)
-        } else {
-          ideas[i].isFavorite = true;
-          favorites.push(ideas[i])
-        }
+    if (ideas[i].id === iD) {
+      if (ideas[i].isFavorite) {
+        ideas[i].isFavorite = false;
+        favorites.splice(i, 1);
+      } else {
+        ideas[i].isFavorite = true;
+        favorites.push(ideas[i]);
       }
     }
-    console.log(`favs list: `, favorites)
   }
+  console.log(`favs list: `, favorites);
+}
 
-function toggleStar(starId) {  
-  console.log(starId)
-  var starIcon = document.getElementById(starId)
+function toggleStar(starId) {
+  console.log(starId);
+  var starIcon = document.getElementById(starId);
   // console.log(`clicked star element`, starIcon)
   // console.log(starIcon.src)
   // console.log(`defult icon displayed`, starIcon.src.includes("assets/star.svg"))
-    if ((starIcon.src.includes("assets/star.svg"))) {
-      starIcon.src = "assets/star-active.svg"
-    } else if ((starIcon.src.includes("assets/star-active.svg"))) {
-      starIcon.src = "assets/star.svg"
-    }
-    // console.log(starIcon.src)
-    console.log(`active icon displayed`, starIcon.src.includes("assets/star-active.svg"))
-    }
+  if (starIcon.src.includes("assets/star.svg")) {
+    starIcon.src = "assets/star-active.svg";
+  } else if (starIcon.src.includes("assets/star-active.svg")) {
+    starIcon.src = "assets/star.svg";
+  }
+  // console.log(starIcon.src)
+  console.log(
+    `active icon displayed`,
+    starIcon.src.includes("assets/star-active.svg")
+  );
+}
 
-
-
+function filterIdeas() {
+    console.log(filterButton.innerHTML)
+  filter = !filter; //  im so proud of this it will now toggle false and true hahah
+  if (filter){
+    filterButton.innerHTML = "Show All Ideas"
+  }else{
+    filterButton.innerHTML = "Show Starred Ideas"
+  }
+  displayIdeas(filter);
+}
+function updatehtml(i, favorite, starred) {
+  ideaGrid.innerHTML += `<div class="card">
+    <div class="delete-box" id="${ideas[i + currentShift].id}">
+        <img class = "fav-button clickables" id="${[
+          ideas[i + currentShift].id + 1,
+        ]}" src = "${favorite}" alt = "${starred}">
+        <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
+    </div>
+    <h2 class="card-title">${ideas[i + currentShift].title}</h2>
+    <p class="card-body">${ideas[i + currentShift].body}</p>
+</div>`;
+}
