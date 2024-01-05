@@ -116,6 +116,11 @@ function deleteCard(iD) {
       displayIdeas();
     }
   }
+  for (i = 0; i < favorites.length; i++) {
+    if (favorites[i].id === iD) {
+      favorites.splice(i, 1);
+    }
+  }
 }
 
 function updateFavs(cardId) {
