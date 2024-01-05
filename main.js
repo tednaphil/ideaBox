@@ -17,8 +17,6 @@ ideaGrid.addEventListener("click", function (event) {
     var cardId = event.target.parentElement.id;
     deleteCard(cardId);
   }
-});
-ideaGrid.addEventListener("click", function (event) {
   if (event.target.className.includes("fav-button")) {
     var cardId = event.target.parentElement.id;
     var starId = event.target.id;
@@ -26,18 +24,18 @@ ideaGrid.addEventListener("click", function (event) {
     toggleStar(starId);
   }
 });
+
 titleField.addEventListener("input", checkFields);
 bodyField.addEventListener("input", checkFields);
 filterButton.addEventListener("click", filterIdeas);
 document.addEventListener("click", checkStars);
 
-saveButton.disabled = true;
-
-
 var ideas = [];
 var currentShift = 0;
 var favorites = [];
 var filter = false;
+
+saveButton.disabled = true;
 
 function checkFields() {
   if (titleField.value && bodyField.value) {
@@ -50,12 +48,14 @@ function checkFields() {
 }
 
 function checkStars() {
-    if (favorites.length > 0) {
+    if (favorites.length > 0 || (filterButton.innerHTML === "Show All Ideas"))  {
         filterButton.classList.remove('hidden');
     } else {
         filterButton.classList.add('hidden');
     }
 }
+
+
 
 function storeIdea() {
   var newIdea = {
