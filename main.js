@@ -60,8 +60,7 @@ function displayIdeas() {
     if (i < 3) {
       ideaGrid.innerHTML += `<div class="card">
                 <div class="delete-box" id="${ideas[i + currentShift].id}">
-                    <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
-                    <img class = "fav-button clickables inactive" id="${[ideas[i + currentShift].id + 2]}" src = "assets/star-active.svg" alt = "Starred">
+                    <img class = "fav-button clickables default" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred"
                     <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
                 </div>
                 <h2 class="card-title">${ideas[i + currentShift].title}</h2>
@@ -140,20 +139,25 @@ function updateFavs(cardId) {
   }
 
 function toggleStar(starId) {  
-  inactiveiD = Number(starId) + 1
+  // inactiveiD = Number(starId) + 1
   console.log(starId)
   var starIcon = document.getElementById(starId)
-  var inactiveStarIcon = document.getElementById(inactiveiD)
+  // var inactiveStarIcon = document.getElementById(inactiveiD)
   console.log(`clicked star element`, starIcon)
-  console.log(`inactive star element`, inactiveStarIcon)
-  if (inactiveStarIcon.classList.contains('inactive')) {
-    starIcon.classList.add('inactive')
-    inactiveStarIcon.classList.toggle('inactive')
-  }
+  // console.log(`inactive star element`, inactiveStarIcon)
+    starIcon.src = "assets/star-active.svg"
+    starIcon.classList.add('active-icon')
+    starIcon.classList.remove('default')
+  
+  // if (inactiveStarIcon.classList.contains('inactive')) {
+  //   starIcon.classList.add('inactive')
+  //   inactiveStarIcon.classList.toggle('inactive')
+  // }
   // if (starIcon.classList.contains('inactive')) {
   //   starIcon.classList.remove('inactive')
   //   inactiveStarIcon.classList.add('inactive')
   // }
 }
+
 
 
