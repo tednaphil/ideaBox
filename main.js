@@ -139,14 +139,11 @@ function updateFavs(cardId) {
   }
 
 function toggleStar(starId) {  
-  // inactiveiD = Number(starId) + 1
   console.log(starId)
   var starIcon = document.getElementById(starId)
-  // var inactiveStarIcon = document.getElementById(inactiveiD)
-  console.log(`clicked star element`, starIcon)
-  // console.log(`inactive star element`, inactiveStarIcon)
-    console.log(starIcon.src)
-    console.log(starIcon.src.includes("assets/star.svg"))
+  // console.log(`clicked star element`, starIcon)
+    // console.log(starIcon.src)
+    // console.log(starIcon.src.includes("assets/star.svg"))
     if ((starIcon.src.includes("assets/star.svg"))) {
       starIcon.src = "assets/star-active.svg"
       // starIcon.classList.add('active-icon')
@@ -154,21 +151,9 @@ function toggleStar(starId) {
     } else if ((starIcon.src.includes("assets/star-active.svg"))) {
       starIcon.src = "assets/star.svg"
     }
-
-    
     console.log(starIcon.src)
-    console.log(`hoping this will be true`, starIcon.src.includes("assets/star-active.svg"))
-  
+    console.log(`is active icon displayed`, starIcon.src.includes("assets/star-active.svg"))
     }
-  
-  // if (inactiveStarIcon.classList.contains('inactive')) {
-  //   starIcon.classList.add('inactive')
-  //   inactiveStarIcon.classList.toggle('inactive')
-  // }
-  // if (starIcon.classList.contains('inactive')) {
-  //   starIcon.classList.remove('inactive')
-  //   inactiveStarIcon.classList.add('inactive')
-  // }
 
 
 
