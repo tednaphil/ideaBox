@@ -19,8 +19,10 @@ ideaGrid.addEventListener("click", function (event) {
 })
 ideaGrid.addEventListener("click", function (event) {
   if (event.target.className.includes("fav-button")) {
-    var cardId = event.target.parentElement.id;  
-    toggleStar(cardId)
+    var cardId = event.target.parentElement.id;
+    var starId = event.target.id;
+    updateFavs(cardId);  
+    toggleStar(starId, cardId);
 }
 })
 titleField.addEventListener("input", checkFields);
@@ -58,7 +60,7 @@ function displayIdeas() {
     if (i < 3) {
       ideaGrid.innerHTML += `<div class="card">
                 <div class="delete-box" id="${ideas[i + currentShift].id}">
-                    <img class = "fav-button clickables" src = "assets/star.svg" alt = "Unstarred">
+                    <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
                     <img class = "fav-button clickables inactive" src = "assets/star-active.svg" alt = "Starred">
                     <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
                 </div>
@@ -116,28 +118,23 @@ function deleteCard(iD) {
   }
 }
 
-function toggleStar(iD) {
+function toggleStar(starId, cardId) {
     iD = Number(iD);
 }
 
-function addToFavs(iD) {
+function updateFavs(cardId) {
 //access the idea object with the parent id of the star clicked
-iD = Number(iD);  
+iD = Number(cardId);  
+console.log(`updateFavs`)
 for (var i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
       ideas[i].isFavorite = true;
       favorites.push(ideas[i]);
     }
+    // if (ideas[i].id === iD && ideas[i].isFavorite === true) {
+    //   ideas[i].isFavorite = false;
+    //   favorites.splice(i, 1)
+    // }
   }
-}
-
-function removeFromFavs(iD) {
-//access the idea object with the parent id of the star clicked
-iD = Number(iD);  
-for (var i = 0; i < ideas.length; i++) {
-    if (ideas[i].id === iD) {
-      ideas[i].isFavorite = false;
-      favorites.splice(ideas[i, 1]);
-    }
-  }
+  console.log(`favs list: `, favorites)
 }
