@@ -118,33 +118,37 @@ function deleteCard(iD) {
   }
 }
 
-function toggleStar(starId, cardId) {
-    iD = Number(starId);
-    inactiveiD = Number(starId) + 1
-    console.log(iD)
-    var starIcon = document.getElementById(starId)
-    var inactiveStarIcon = document.getElementById(inactiveiD)
-    console.log(`clicked star element`, starIcon)
-    console.log(`inactive star element`, inactiveStarIcon)
-    starIcon.classList.toggle('hidden')
-    inactiveStarIcon.classList.toggle('inactive')
-
-    
-}
-
 function updateFavs(cardId) {
-iD = Number(cardId);  
-// console.log(`updateFavs`)
-for (var i = 0; i < ideas.length; i++) {
-    if (ideas[i].id === iD) {
-      if (ideas[i].isFavorite) {
-        ideas[i].isFavorite = false;
-        favorites.splice(i, 1)
-      } else {
-        ideas[i].isFavorite = true;
-        favorites.push(ideas[i])
+  iD = Number(cardId);  
+  for (var i = 0; i < ideas.length; i++) {
+      if (ideas[i].id === iD) {
+        if (ideas[i].isFavorite) {
+          ideas[i].isFavorite = false;
+          favorites.splice(i, 1)
+        } else {
+          ideas[i].isFavorite = true;
+          favorites.push(ideas[i])
+        }
       }
     }
+    console.log(`favs list: `, favorites)
   }
-  console.log(`favs list: `, favorites)
+
+function toggleStar(starId) {  
+  inactiveiD = Number(starId) + 1
+  console.log(starId)
+  var starIcon = document.getElementById(starId)
+  var inactiveStarIcon = document.getElementById(inactiveiD)
+  console.log(`clicked star element`, starIcon)
+  console.log(`inactive star element`, inactiveStarIcon)
+  if (inactiveStarIcon.classList.contains('inactive')) {
+    starIcon.classList.add('inactive')
+    inactiveStarIcon.classList.toggle('inactive')
+  }
+  // if (starIcon.classList.contains('inactive')) {
+  //   starIcon.classList.remove('inactive')
+  //   inactiveStarIcon.classList.add('inactive')
+  // }
 }
+
+
