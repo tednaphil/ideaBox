@@ -61,7 +61,7 @@ function displayIdeas() {
       ideaGrid.innerHTML += `<div class="card">
                 <div class="delete-box" id="${ideas[i + currentShift].id}">
                     <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
-                    <img class = "fav-button clickables inactive" src = "assets/star-active.svg" alt = "Starred">
+                    <img class = "fav-button clickables inactive" id="${[ideas[i + currentShift].id + 2]}" src = "assets/star-active.svg" alt = "Starred">
                     <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
                 </div>
                 <h2 class="card-title">${ideas[i + currentShift].title}</h2>
@@ -119,12 +119,22 @@ function deleteCard(iD) {
 }
 
 function toggleStar(starId, cardId) {
-    iD = Number(iD);
+    iD = Number(starId);
+    inactiveiD = Number(starId) + 1
+    console.log(iD)
+    var starIcon = document.getElementById(starId)
+    var inactiveStarIcon = document.getElementById(inactiveiD)
+    console.log(`clicked star element`, starIcon)
+    console.log(`inactive star element`, inactiveStarIcon)
+    starIcon.classList.toggle('hidden')
+    inactiveStarIcon.classList.toggle('inactive')
+
+    
 }
 
 function updateFavs(cardId) {
 iD = Number(cardId);  
-console.log(`updateFavs`)
+// console.log(`updateFavs`)
 for (var i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
       if (ideas[i].isFavorite) {
