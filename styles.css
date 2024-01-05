@@ -1,172 +1,205 @@
 * {
-    font-family: "Poppins", sans-serif;
-    src: url("https://fonts.google.com/specimen/Poppins?query=poppins");
+  font-family: "Poppins", sans-serif;
+  src: url("https://fonts.google.com/specimen/Poppins?query=poppins");
 }
 
 body {
-    display: flex;
-    background-color: #EAEAF4;
-    margin: 0;
+  display: flex;
+  background-color: #eaeaf4;
+  margin: 0;
 }
 
 main {
-    width: 100%;
+  width: 100%;
 }
 
 header {
-    background-color: #1F1F3C;
-    width: 35%;
-    text-align: center;
+  background-color: #1f1f3c;
+  width: 35%;
+  text-align: center;
 }
 
 h1 {
-    margin-top: 8%;
-    font-size: 6.0vw;
-    color: #EAEAF4;
+  margin-top: 8%;
+  margin-bottom: 6%;
+  font-size: 6vw;
+  color: #eaeaf4;
 }
 
 form {
-    background-color: #A8AAD2;
-    color: #1F1F3C;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    height: 50%;
-    justify-content: space-around; 
+  background-color: #a8aad2;
+  color: #1f1f3c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+  justify-content: space-around;
 }
 
 .form-field {
-    display: flex;
-    width: 90%; 
-    height: 16%;
-    justify-content: flex-end;
-    align-items: center;
+  display: flex;
+  width: 90%;
+  height: 16%;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 label {
-    font-size: x-large  ;
-    font-weight: 500;
-    margin-right: 1%;
+  font-size: x-large;
+  font-weight: 500;
+  margin-right: 1%;
 }
 
 input[type="text"] {
-    border: solid 3px #1F1F3C ;
-    width: 90%;
-    height: 80%;
+  border: solid 3px #1f1f3c;
+  width: 90%;
+  height: 80%;
+  font-size: 125%;
 }
 
 textarea {
-    border: solid 3px #1F1F3C ;
-    width: 90%;
-    height: 200%;
-    resize: none;
+  border: solid 3px #1f1f3c;
+  width: 90%;
+  height: 200%;
+  resize: none;
+  font-size: 125%;
 }
 
 .save-button {
-    background-color: #1F1F3C;
-    color: #EAEAF4;
-    font-size: x-large;
-    padding: 2%;
-    border: none;
-    width: 90%;
-    height: 100%;
+  background-color: #1f1f3c;
+  color: #eaeaf4;
+  font-size: x-large;
+  padding: 2%;
+  border: none;
+  width: 90%;
+  height: 115%;
 }
 .card {
-    background-color: white;
-    border: solid 3px #1F1F3C;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-size: x-large;
-    color: #1F1F3C;
-    grid-row-end: span 2;
-    margin-bottom: 70px;
-    width: 80%;
-    height: 100%;
+  background-color: white;
+  border: solid 3px #1f1f3c;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: x-large;
+  color: #1f1f3c;
+  grid-row-end: span 2;
+  margin-bottom: 70px;
+  width: 80%;
+  height: 100%;
 }
 
 .delete-box {
-    height: 20%;
-    background-color: #1F1F3C;
-    display: flex;
-    justify-content: flex-end; /* will need to change to space-between when fav icon added */
+  height: 20%;
+  background-color: #1f1f3c;
+  display: flex;
+  justify-content: space-between;
 }
 
-.delete-button {
-    height:95%;
+.delete-button,
+.fav-button {
+  height: 95%;
 }
 
-/* can add a fav-button class for the fav icon or can reclassify delete-button and delete-box to apply to all buttons in "icon bar" */
-
-/* .fav-button {
-    height:95%
-} */
-  
 .card-title {
-    letter-spacing: 1px;
-    text-transform: capitalize;
-    margin-top: 30px;
-}
-  
-.card-body {
-    font-weight: 100;
+  letter-spacing: 1px;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+  text-transform: capitalize;
+  margin-top: 30px;
+  margin-bottom: 0%;
+  font-size: larger;
 }
 
-#card-display{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 100px 190px;
-    grid-gap: 20px;
-    padding: 20px 0%;
-    height: 50%;
-    width: 90%;
-    margin-bottom: 20px;
-    justify-items: center;
+.card-body {
+  font-weight: 100;
+  font-size: larger;
+  margin-top: 5%;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+}
+
+#card-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 45% 50%;
+  grid-gap: 20px;
+  padding: 20px 0%;
+  height: 90%;
+  width: 90%;
+  margin-bottom: 20px;
+  justify-items: center;
 }
 
 #card-area {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  height: 45%;
 }
 
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .arrow {
-    width: 20px;
-    opacity: .5;
+  width: 20px;
+  opacity: 0.5;
 }
 
-.fade {
-    animation: fadeIn;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
+.fadeIn {
+  animation: fadeIn;
+  animation-duration: .75s;
+  animation-timing-function: ease-in-out;
+}
+
+.fadeOut {
+  animation: fadeOut;
+  animation-duration: .75s;
+  animation-timing-function: ease-in-out;
 }
 
 #back-arrow {
-    margin-left: 2%;
+  margin-left: 2%;
 }
 
 #next-arrow {
-    margin-right: 2%;
+  margin-right: 2%;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: .5;
+  }
+}
 
+@keyframes fadeOut {
+  0% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .clickables {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .grey-out {
-    background-color: grey;
-    cursor: default;
+  background-color: grey;
+  cursor: default;
+}
+.inactive{
+    display:none;
+}
+#filter{
+    border: none;
+    width: 90%;
+    height: 8%;
+    font-size: x-large;
+    background-color:#a8aad2 ;
+    color:#1f1f3c;
+    font-weight: bold;
 }
