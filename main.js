@@ -48,7 +48,7 @@ function checkFields() {
 }
 
 function checkStars() {
-    if (favorites.length > 0 || (filterButton.innerHTML === "Show All Ideas"))  {
+    if (favorites.length > 0) {
       filterButton.classList.remove('hidden');
     } else {
       filterButton.classList.add('hidden');
@@ -153,7 +153,9 @@ function updateFavs(cardId) {
     if (ideas[i].id === iD) {
       if (ideas[i].isFavorite) {
         ideas[i].isFavorite = false;
-        favorites.splice(i, 1);
+        for (x = 0; x < favorites.length; x++){
+          favorites.splice(x, 1);
+        }
       } else {
         ideas[i].isFavorite = true;
         favorites.push(ideas[i]);
