@@ -49,13 +49,11 @@ function checkFields() {
 
 function checkStars() {
     if (favorites.length > 0 || (filterButton.innerHTML === "Show All Ideas"))  {
-        filterButton.classList.remove('hidden');
+      filterButton.classList.remove('hidden');
     } else {
-        filterButton.classList.add('hidden');
+      filterButton.classList.add('hidden');
     }
 }
-
-
 
 function storeIdea() {
   var newIdea = {
@@ -69,6 +67,7 @@ function storeIdea() {
 
 function displayIdeas() {
   ideaGrid.innerHTML = "";
+  // var displayIndexStart = 3
   for (var i = 0; i < ideas.length; i++) {
     var favorite = "assets/star.svg";
     var starred = "Unstarred";
@@ -87,19 +86,27 @@ function displayIdeas() {
     }
   }
   if (ideas.length > 3) {
+    nextArrow.disabled = false;
+    nextArrow.classList.remove("fadeOut");
     nextArrow.classList.remove("hidden");
-    nextArrow.classList.add("fade");
+    nextArrow.classList.add("fadeIn");
   }
   if (ideas.length - currentShift < 4) {
-    nextArrow.classList.add("hidden");
-    nextArrow.classList.remove("fade");
+    nextArrow.disabled = true;
+    nextArrow.classList.remove("fadeIn");
+    nextArrow.classList.add("fadeOut");
+    setTimeout((nextArrow.classList.add("hidden")), 750);
   }
   if (currentShift > 0) {
+    backArrow.disabled = false;
+    backArrow.classList.remove("fadeOut");
     backArrow.classList.remove("hidden");
-    backArrow.classList.add("fade");
+    backArrow.classList.add("fadeIn");
   } else if (currentShift === 0) {
-    backArrow.classList.add("hidden");
-    backArrow.classList.remove("fade");
+    backArrow.disabled = true;
+    backArrow.classList.remove("fadeIn");
+    backArrow.classList.add("fadeOut");
+    setTimeout((backArrow.classList.add("hidden")), 750);
   }
 }
 

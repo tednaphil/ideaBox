@@ -133,9 +133,15 @@ textarea {
   opacity: 0.5;
 }
 
-.fade {
+.fadeIn {
   animation: fadeIn;
-  animation-duration: 1s;
+  animation-duration: .75s;
+  animation-timing-function: ease-in-out;
+}
+
+.fadeOut {
+  animation: fadeOut;
+  animation-duration: .75s;
   animation-timing-function: ease-in-out;
 }
 
@@ -152,7 +158,16 @@ textarea {
     opacity: 0;
   }
   100% {
-    opacity: 1;
+    opacity: .5;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
