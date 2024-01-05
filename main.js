@@ -40,7 +40,7 @@ saveButton.disabled = true;
 function checkFields() {
   if (titleField.value && bodyField.value) {
     saveButton.disabled = false;
-    saveButton.classList.remove(`grey-out`);
+    saveButton.classList.remove("grey-out");
   } else {
     saveButton.classList.add("grey-out");
     saveButton.disabled = true;
@@ -137,6 +137,9 @@ function deleteCard(iD) {
   for (i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
       ideas.splice(i, 1);
+      if (ideas.length > 2){
+        currentShift --;
+      }
       displayIdeas();
     }
   }
