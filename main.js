@@ -179,6 +179,9 @@ function toggleStar(starId) {
     starIcon.src = "assets/star.svg";
   }
   // console.log(starIcon.src)
+  if (filter && favorites.length === 0){
+    filter = false;
+  }
   displayIdeas();
 }
 
