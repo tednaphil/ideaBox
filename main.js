@@ -60,7 +60,7 @@ function displayIdeas() {
     if (i < 3) {
       ideaGrid.innerHTML += `<div class="card">
                 <div class="delete-box" id="${ideas[i + currentShift].id}">
-                    <img class = "fav-button clickables default" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred"
+                    <img class = "fav-button clickables default" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
                     <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
                 </div>
                 <h2 class="card-title">${ideas[i + currentShift].title}</h2>
@@ -145,9 +145,21 @@ function toggleStar(starId) {
   // var inactiveStarIcon = document.getElementById(inactiveiD)
   console.log(`clicked star element`, starIcon)
   // console.log(`inactive star element`, inactiveStarIcon)
-    starIcon.src = "assets/star-active.svg"
-    starIcon.classList.add('active-icon')
-    starIcon.classList.remove('default')
+    console.log(starIcon.src)
+    console.log(starIcon.src.includes("assets/star.svg"))
+    if ((starIcon.src.includes("assets/star.svg"))) {
+      starIcon.src = "assets/star-active.svg"
+      // starIcon.classList.add('active-icon')
+      // starIcon.classList.remove('default')
+    } else if ((starIcon.src.includes("assets/star-active.svg"))) {
+      starIcon.src = "assets/star.svg"
+    }
+
+    
+    console.log(starIcon.src)
+    console.log(`hoping this will be true`, starIcon.src.includes("assets/star-active.svg"))
+  
+    }
   
   // if (inactiveStarIcon.classList.contains('inactive')) {
   //   starIcon.classList.add('inactive')
@@ -157,7 +169,6 @@ function toggleStar(starId) {
   //   starIcon.classList.remove('inactive')
   //   inactiveStarIcon.classList.add('inactive')
   // }
-}
 
 
 
