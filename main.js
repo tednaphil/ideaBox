@@ -57,10 +57,19 @@ function storeIdea() {
 function displayIdeas() {
   ideaGrid.innerHTML = "";
   for (var i = 0; i < ideas.length; i++) {
+    var favorite = "assets/star.svg"
+    var stared = "Unstarred"
     if (i < 3) {
+        
+        if(ideas[i+currentShift].isFavorite){
+           favorite = "assets/star-active.svg"
+           stared = "Starred"
+
+        }
+        
       ideaGrid.innerHTML += `<div class="card">
                 <div class="delete-box" id="${ideas[i + currentShift].id}">
-                    <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "assets/star.svg" alt = "Unstarred">
+                    <img class = "fav-button clickables" id="${[ideas[i + currentShift].id + 1]}" src = "${favorite}" alt = "${stared}">
                     <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
                 </div>
                 <h2 class="card-title">${ideas[i + currentShift].title}</h2>
