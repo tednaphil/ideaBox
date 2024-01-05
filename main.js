@@ -29,7 +29,10 @@ ideaGrid.addEventListener("click", function (event) {
 titleField.addEventListener("input", checkFields);
 bodyField.addEventListener("input", checkFields);
 filterButton.addEventListener("click", filterIdeas);
+document.addEventListener("click", checkStars);
+
 saveButton.disabled = true;
+
 
 var ideas = [];
 var currentShift = 0;
@@ -44,6 +47,14 @@ function checkFields() {
     saveButton.classList.add("grey-out");
     saveButton.disabled = true;
   }
+}
+
+function checkStars() {
+    if (favorites.length > 0) {
+        filterButton.classList.remove('hidden');
+    } else {
+        filterButton.classList.add('hidden');
+    }
 }
 
 function storeIdea() {
@@ -171,9 +182,9 @@ function filterIdeas() {
 function updatehtml(i, favorite, starred) {
   ideaGrid.innerHTML += `<div class="card">
     <div class="delete-box" id="${ideas[i + currentShift].id}">
-        <img class = "fav-button clickables" id="${[
-          ideas[i + currentShift].id + 1,
-        ]}" src = "${favorite}" alt = "${starred}">
+        <img class = "fav-button clickables" id="${
+          ideas[i + currentShift].id + 1
+        }" src = "${favorite}" alt = "${starred}">
         <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
     </div>
     <h2 class="card-title">${ideas[i + currentShift].title}</h2>
