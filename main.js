@@ -58,12 +58,10 @@ function storeIdea() {
 
 function displayIdeas(filter) {
   ideaGrid.innerHTML = "";
-  console.log("i work 1");
   for (var i = 0; i < ideas.length; i++) {
     var favorite = "assets/star.svg";
     var stared = "Unstarred";
     if (i < 3) {
-      console.log("i work 2 ");
       if (ideas[i + currentShift].isFavorite) {
         favorite = "assets/star-active.svg";
         stared = "Starred";
@@ -144,7 +142,6 @@ function updateFavs(cardId) {
       }
     }
   }
-  console.log(`favs list: `, favorites);
 }
 
 function toggleStar(starId) {
@@ -159,22 +156,18 @@ function toggleStar(starId) {
     starIcon.src = "assets/star.svg";
   }
   // console.log(starIcon.src)
-  console.log(
-    `active icon displayed`,
-    starIcon.src.includes("assets/star-active.svg")
-  );
 }
 
 function filterIdeas() {
-    console.log(filterButton.innerHTML)
   filter = !filter; //  im so proud of this it will now toggle false and true hahah
-  if (filter){
-    filterButton.innerHTML = "Show All Ideas"
-  }else{
-    filterButton.innerHTML = "Show Starred Ideas"
+  if (filter) {
+    filterButton.innerHTML = "Show All Ideas";
+  } else {
+    filterButton.innerHTML = "Show Starred Ideas";
   }
   displayIdeas(filter);
 }
+
 function updatehtml(i, favorite, starred) {
   ideaGrid.innerHTML += `<div class="card">
     <div class="delete-box" id="${ideas[i + currentShift].id}">
