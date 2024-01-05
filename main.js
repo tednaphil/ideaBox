@@ -67,22 +67,22 @@ function storeIdea() {
   ideas.push(newIdea);
 }
 
-function displayIdeas(filter) {
+function displayIdeas() {
   ideaGrid.innerHTML = "";
   for (var i = 0; i < ideas.length; i++) {
     var favorite = "assets/star.svg";
-    var stared = "Unstarred";
+    var starred = "Unstarred";
     if (i < 3) {
       if (ideas[i + currentShift].isFavorite) {
         favorite = "assets/star-active.svg";
-        stared = "Starred";
+        starred = "Starred";
       }
       if (filter) {
         if (ideas[i + currentShift].isFavorite) {
-          updatehtml(i, favorite, stared);
+          updatehtml(i, favorite, starred);
         }
       } else {
-        updatehtml(i, favorite, stared);
+        updatehtml(i, favorite, starred);
       }
     }
   }
@@ -156,7 +156,7 @@ function updateFavs(cardId) {
 }
 
 function toggleStar(starId) {
-  console.log(starId);
+//   console.log(starId);
   var starIcon = document.getElementById(starId);
   // console.log(`clicked star element`, starIcon)
   // console.log(starIcon.src)
@@ -167,6 +167,7 @@ function toggleStar(starId) {
     starIcon.src = "assets/star.svg";
   }
   // console.log(starIcon.src)
+  displayIdeas();
 }
 
 function filterIdeas() {
@@ -176,7 +177,7 @@ function filterIdeas() {
   } else {
     filterButton.innerHTML = "Show Starred Ideas";
   }
-  displayIdeas(filter);
+  displayIdeas();
 }
 
 function updatehtml(i, favorite, starred) {
