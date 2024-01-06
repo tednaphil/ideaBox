@@ -94,6 +94,21 @@ function displayIdeas() {
   checkArrows();
 }
 
+function updatehtml(array, index, favorite, starred) {
+  if (array && array[index]) {
+    ideaGrid.innerHTML += `<div class="card">
+          <div class="delete-box" id="${array[index].id}">
+              <img class="fav-button clickables" id="${
+                array[index].id + 1
+              }" src="${favorite}" alt="${starred}">
+              <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
+          </div>
+          <h2 class="card-title">${array[index].title}</h2>
+          <p class="card-body">${array[index].body}</p>
+      </div>`;
+  }
+}
+
 function checkArrows() {
   if (filter) {
     nextIsNeeded = false;
@@ -106,27 +121,17 @@ function checkArrows() {
     }
     manageNextArrow(nextIsNeeded);
     manageBackArrow(backIsNeeded);
-
-    // if (favorites.length - currentShift < 4) {
-    //   manageNextArrow(false);
-    // }
-    // if (currentShift > 0) {
-    //   manageBackArrow(true);
-    // } else if (currentShift === 0) {
-    //   manageBackArrow(false);
-    // }
   } else {
-    if (ideas.length > 3) {
-      manageNextArrow(true);
+    nextIsNeeded = false;
+    backIsNeeded = false;
+    if ((ideas.length > 3) && (ideas.length - currentShift > 3)) {
+      nextIsNeeded = true;
     }
-    if (ideas.length - currentShift < 4) {
-      manageNextArrow(false);
+    if ((currentShift > 0)){
+      backIsNeeded = true;
     }
-    if (currentShift > 0) {
-      manageBackArrow(true);
-    } else if (currentShift === 0) {
-      manageBackArrow(false);
-    }
+    manageNextArrow(nextIsNeeded);
+    manageBackArrow(backIsNeeded);
   }
 }
 
@@ -188,10 +193,6 @@ function deleteCard(iD) {
       if (currentShift){
         currentShift--;
       }
-      // if (ideas.length > 2) {
-        // currentShift--;
-      // }
-      // displayIdeas();
     }
   }
   for (var i = 0; i < favorites.length; i++) {
@@ -199,7 +200,6 @@ function deleteCard(iD) {
       favorites.splice(i, 1);
       if (filter && favorites.length === 0) {
         filter = false;
-        // displayIdeas();
       }
     }
   }
@@ -253,21 +253,6 @@ function handleFilterButton() {
   currentShiftReset();
   filterIdeas();
   displayIdeas();
-}
-
-function updatehtml(array, i, favorite, starred) {
-  if (array && array[i]) {
-    ideaGrid.innerHTML += `<div class="card">
-          <div class="delete-box" id="${array[i].id}">
-              <img class="fav-button clickables" id="${
-                array[i].id + 1
-              }" src="${favorite}" alt="${starred}">
-              <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
-          </div>
-          <h2 class="card-title">${array[i].title}</h2>
-          <p class="card-body">${array[i].body}</p>
-      </div>`;
-  }
 }
 
 
