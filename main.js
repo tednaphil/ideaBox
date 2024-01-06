@@ -213,7 +213,9 @@ function updateFavs(cardId) {
       if (ideas[i].isFavorite) {
         ideas[i].isFavorite = false;
         for (x = 0; x < favorites.length; x++) {
-          favorites.splice(x, 1);
+          if (favorites[x].id === iD) {
+            favorites.splice(x, 1);
+          }
         }
       } else {
         ideas[i].isFavorite = true;
