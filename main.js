@@ -75,47 +75,39 @@ function displayIdeas() {
   ideaGrid.innerHTML = "";
 
   for (var i = 0; i < ideas.length; i++) {
-    console.log(favorites[i]);
     var index = i + currentShift;
     var favorite = "assets/star.svg";
     var starred = "Unstarred";
     if (i < 3) {
-      
       if (filter) {
         favorite = "assets/star-active.svg";
         starred = "Starred";
         updatehtml(favorites, i, favorite, starred);
       } else {
         if (ideas[index].isFavorite) {
-            favorite = "assets/star-active.svg";
-            starred = "Starred";
+          favorite = "assets/star-active.svg";
+          starred = "Starred";
         }
         updatehtml(ideas, index, favorite, starred);
+      }
     }
   }
-}
-  if (ideas.length > 3) {
-    nextArrow.disabled = false;
-    nextArrow.classList.remove("fadeOut");
-    nextArrow.classList.remove("hidden");
-    nextArrow.classList.add("fadeIn");
-  }
-  if (ideas.length - currentShift < 4) {
-    nextArrow.disabled = true;
-    nextArrow.classList.remove("fadeIn");
-    nextArrow.classList.add("fadeOut");
-    setTimeout(nextArrow.classList.add("hidden"), 750);
-  }
-  if (currentShift > 0) {
-    backArrow.disabled = false;
-    backArrow.classList.remove("fadeOut");
-    backArrow.classList.remove("hidden");
-    backArrow.classList.add("fadeIn");
-  } else if (currentShift === 0) {
-    backArrow.disabled = true;
-    backArrow.classList.remove("fadeIn");
-    backArrow.classList.add("fadeOut");
-    setTimeout(backArrow.classList.add("hidden"), 750);
+
+  if (filter) {
+    manageNextArrow(false);
+    manageBackArrow(false);
+  } else {
+    if (ideas.length > 3) {
+      manageNextArrow(true);
+    }
+    if (ideas.length - currentShift < 4) {
+      manageNextArrow(false);
+    }
+    if (currentShift > 0) {
+      manageBackArrow(true);
+    } else if (currentShift === 0) {
+      manageBackArrow(false);
+    }
   }
 }
 
@@ -201,15 +193,6 @@ function filterIdeas() {
   } else {
     filterButton.innerHTML = "Show Starred Ideas";
   }
-  /*
-  backArrow.disabled = true;
-  backArrow.classList.remove("fadeIn");
-  backArrow.classList.add("fadeOut");
-  nextArrow.disabled = true;
-  nextArrow.classList.remove("fadeIn");
-  nextArrow.classList.add("fadeOut");
-  we have to maek the arrows go away whwen you clikc the filter button otherwise they mess things up
-  */
 }
 
 function handleFilterButton() {
@@ -218,14 +201,42 @@ function handleFilterButton() {
 }
 
 function updatehtml(array, i, favorite, starred) {
-  ideaGrid.innerHTML += `<div class="card">
-    <div class="delete-box" id="${array[i].id}">
-        <img class = "fav-button clickables" id="${
-          array[i].id + 1
-        }" src = "${favorite}" alt = "${starred}">
-        <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
-    </div>
-    <h2 class="card-title">${array[i].title}</h2>
-    <p class="card-body">${array[i].body}</p>
-</div>`;
+  if (array && array[i]) {
+    ideaGrid.innerHTML += `<div class="card">
+          <div class="delete-box" id="${array[i].id}">
+              <img class="fav-button clickables" id="${
+                array[i].id + 1
+              }" src="${favorite}" alt="${starred}">
+              <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
+          </div>
+          <h2 class="card-title">${array[i].title}</h2>
+          <p class="card-body">${array[i].body}</p>
+      </div>`;
+  }
+}
+function manageNextArrow(next) {
+  if (next) {
+    nextArrow.disabled = false;
+    nextArrow.classList.remove("fadeOut");
+    nextArrow.classList.remove("hidden");
+    nextArrow.classList.add("fadeIn");
+  } else {
+    nextArrow.disabled = true;
+    nextArrow.classList.remove("fadeIn");
+    nextArrow.classList.add("fadeOut");
+    setTimeout(nextArrow.classList.add("hidden"), 750);
+  }
+}
+function manageBackArrow(back) {
+  if (back) {
+    backArrow.disabled = false;
+    backArrow.classList.remove("fadeOut");
+    backArrow.classList.remove("hidden");
+    backArrow.classList.add("fadeIn");
+  } else {
+    backArrow.disabled = true;
+    backArrow.classList.remove("fadeIn");
+    backArrow.classList.add("fadeOut");
+    setTimeout(backArrow.classList.add("hidden"), 750);
+  }
 }
