@@ -1,5 +1,5 @@
-var titleField = document.querySelector("#submitted-title");
-var bodyField = document.querySelector("#submitted-body");
+var titleField = document.querySelector(".submitted-title");
+var bodyField = document.querySelector(".submitted-body");
 var saveButton = document.querySelector(".save-button");
 var ideaGrid = document.querySelector("#card-display");
 var nextArrow = document.querySelector("#next-arrow");
@@ -10,8 +10,11 @@ saveButton.addEventListener("click", function (event) {
   event.preventDefault();
   handleSave();
 });
+
 nextArrow.addEventListener("click", nextIdea);
+
 backArrow.addEventListener("click", prevIdea);
+
 ideaGrid.addEventListener("click", function (event) {
   if (event.target.className.includes("delete-button")) {
     var cardId = event.target.parentElement.id;
@@ -26,8 +29,11 @@ ideaGrid.addEventListener("click", function (event) {
 });
 
 titleField.addEventListener("input", checkFields);
+
 bodyField.addEventListener("input", checkFields);
-filterButton.addEventListener("click", filterIdeas);
+
+filterButton.addEventListener("click", handleFilterButton);
+
 document.addEventListener("click", checkStars);
 
 var ideas = [];
@@ -48,11 +54,11 @@ function checkFields() {
 }
 
 function checkStars() {
-    if (favorites.length > 0) {
-      filterButton.classList.remove('hidden');
-    } else {
-      filterButton.classList.add('hidden');
-    }
+  if (favorites.length > 0) {
+    filterButton.classList.remove("hidden");
+  } else {
+    filterButton.classList.add("hidden");
+  }
 }
 
 function storeIdea() {
@@ -62,51 +68,98 @@ function storeIdea() {
     id: Date.now(),
     isFavorite: false,
   };
-  ideas.push(newIdea);
+  ideas.unshift(newIdea);
 }
 
 function displayIdeas() {
   ideaGrid.innerHTML = "";
-  // var displayIndexStart = 3
   for (var i = 0; i < ideas.length; i++) {
+    var index = i + currentShift;
     var favorite = "assets/star.svg";
     var starred = "Unstarred";
     if (i < 3) {
-      if (ideas[i + currentShift].isFavorite) {
+      if (filter) {
         favorite = "assets/star-active.svg";
         starred = "Starred";
-      }
-      if (filter) {
-        if (ideas[i + currentShift].isFavorite) {
-          updatehtml(i, favorite, starred);
-        }
+        updatehtml(favorites, index, favorite, starred);
       } else {
-        updatehtml(i, favorite, starred);
+        if (ideas[index].isFavorite) {
+          favorite = "assets/star-active.svg";
+          starred = "Starred";
+        }
+        updatehtml(ideas, index, favorite, starred);
       }
     }
   }
-  if (ideas.length > 3) {
+  checkArrows();
+}
+
+function updatehtml(array, index, favorite, starred) {
+  if (array && array[index]) {
+    ideaGrid.innerHTML += `<div class="card">
+          <div class="delete-box" id="${array[index].id}">
+              <img class="fav-button clickables" id="${
+                array[index].id + 1
+              }" src="${favorite}" alt="${starred}">
+              <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
+          </div>
+          <h2 class="card-title">${array[index].title}</h2>
+          <p class="card-body">${array[index].body}</p>
+      </div>`;
+  }
+}
+
+function checkArrows() {
+  if (filter) {
+    nextIsNeeded = false;
+    backIsNeeded = false;
+    if ((favorites.length > 3) && (favorites.length - currentShift > 3)) {
+      nextIsNeeded = true;
+    }
+    if ((currentShift > 0)){
+      backIsNeeded = true;
+    }
+    manageNextArrow(nextIsNeeded);
+    manageBackArrow(backIsNeeded);
+  } else {
+    nextIsNeeded = false;
+    backIsNeeded = false;
+    if ((ideas.length > 3) && (ideas.length - currentShift > 3)) {
+      nextIsNeeded = true;
+    }
+    if ((currentShift > 0)){
+      backIsNeeded = true;
+    }
+    manageNextArrow(nextIsNeeded);
+    manageBackArrow(backIsNeeded);
+  }
+}
+
+function manageNextArrow(isNeeded) {
+  if (isNeeded) {
     nextArrow.disabled = false;
     nextArrow.classList.remove("fadeOut");
     nextArrow.classList.remove("hidden");
     nextArrow.classList.add("fadeIn");
-  }
-  if (ideas.length - currentShift < 4) {
+  } else {
     nextArrow.disabled = true;
     nextArrow.classList.remove("fadeIn");
     nextArrow.classList.add("fadeOut");
-    setTimeout((nextArrow.classList.add("hidden")), 750);
+    setTimeout(function() {nextArrow.classList.add("hidden")}, 750);
   }
-  if (currentShift > 0) {
+}
+
+function manageBackArrow(isNeeded) {
+  if (isNeeded) {
     backArrow.disabled = false;
     backArrow.classList.remove("fadeOut");
     backArrow.classList.remove("hidden");
     backArrow.classList.add("fadeIn");
-  } else if (currentShift === 0) {
+  } else {
     backArrow.disabled = true;
     backArrow.classList.remove("fadeIn");
     backArrow.classList.add("fadeOut");
-    setTimeout((backArrow.classList.add("hidden")), 750);
+    setTimeout(function() {backArrow.classList.add("hidden")}, 750);
   }
 }
 
@@ -134,20 +187,23 @@ function prevIdea() {
 
 function deleteCard(iD) {
   iD = Number(iD);
-  for (i = 0; i < ideas.length; i++) {
+  for (var i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
       ideas.splice(i, 1);
-      if (ideas.length > 2){
-        currentShift --;
+      if (currentShift){
+        currentShift--;
       }
-      displayIdeas();
     }
   }
-  for (i = 0; i < favorites.length; i++) {
+  for (var i = 0; i < favorites.length; i++) {
     if (favorites[i].id === iD) {
       favorites.splice(i, 1);
+      if (filter && favorites.length === 0) {
+        filter = false;
+      }
     }
   }
+  displayIdeas();
 }
 
 function updateFavs(cardId) {
@@ -156,54 +212,49 @@ function updateFavs(cardId) {
     if (ideas[i].id === iD) {
       if (ideas[i].isFavorite) {
         ideas[i].isFavorite = false;
-        for (x = 0; x < favorites.length; x++){
-          favorites.splice(x, 1);
+        for (x = 0; x < favorites.length; x++) {
+          if (favorites[x].id === iD) {
+            favorites.splice(x, 1);
+          }
         }
       } else {
         ideas[i].isFavorite = true;
-        favorites.push(ideas[i]);
+        favorites.unshift(ideas[i]);
       }
     }
   }
 }
 
 function toggleStar(starId) {
-//   console.log(starId);
   var starIcon = document.getElementById(starId);
-  // console.log(`clicked star element`, starIcon)
-  // console.log(starIcon.src)
-  // console.log(`defult icon displayed`, starIcon.src.includes("assets/star.svg"))
   if (starIcon.src.includes("assets/star.svg")) {
     starIcon.src = "assets/star-active.svg";
   } else if (starIcon.src.includes("assets/star-active.svg")) {
     starIcon.src = "assets/star.svg";
   }
-  // console.log(starIcon.src)
-  if (filter && favorites.length === 0){
-    filter = false;
+  if (filter && favorites.length === 0) {
+    filterIdeas();
   }
   displayIdeas();
 }
 
+function currentShiftReset() {
+  currentShift = 0;
+}
+
 function filterIdeas() {
-  filter = !filter; //  im so proud of this it will now toggle false and true hahah
+  filter = !filter;
   if (filter) {
     filterButton.innerHTML = "Show All Ideas";
   } else {
     filterButton.innerHTML = "Show Starred Ideas";
   }
+}
+
+function handleFilterButton() {
+  currentShiftReset();
+  filterIdeas();
   displayIdeas();
 }
 
-function updatehtml(i, favorite, starred) {
-  ideaGrid.innerHTML += `<div class="card">
-    <div class="delete-box" id="${ideas[i + currentShift].id}">
-        <img class = "fav-button clickables" id="${
-          ideas[i + currentShift].id + 1
-        }" src = "${favorite}" alt = "${starred}">
-        <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
-    </div>
-    <h2 class="card-title">${ideas[i + currentShift].title}</h2>
-    <p class="card-body">${ideas[i + currentShift].body}</p>
-</div>`;
-}
+
