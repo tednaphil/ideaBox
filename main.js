@@ -91,18 +91,30 @@ function displayIdeas() {
       }
     }
   }
+  checkArrows();
+}
+
+function checkArrows() {
   if (filter) {
-    if (favorites.length > 3) {
-      manageNextArrow(true);
+    nextIsNeeded = false;
+    backIsNeeded = false;
+    if ((favorites.length > 3) && (favorites.length - currentShift > 3)) {
+      nextIsNeeded = true;
     }
-    if (favorites.length - currentShift < 4) {
-      manageNextArrow(false);
+    if ((currentShift > 0)){
+      backIsNeeded = true;
     }
-    if (currentShift > 0) {
-      manageBackArrow(true);
-    } else if (currentShift === 0) {
-      manageBackArrow(false);
-    }
+    manageNextArrow(nextIsNeeded);
+    manageBackArrow(backIsNeeded);
+
+    // if (favorites.length - currentShift < 4) {
+    //   manageNextArrow(false);
+    // }
+    // if (currentShift > 0) {
+    //   manageBackArrow(true);
+    // } else if (currentShift === 0) {
+    //   manageBackArrow(false);
+    // }
   } else {
     if (ideas.length > 3) {
       manageNextArrow(true);
@@ -115,6 +127,34 @@ function displayIdeas() {
     } else if (currentShift === 0) {
       manageBackArrow(false);
     }
+  }
+}
+
+function manageNextArrow(isNeeded) {
+  if (isNeeded) {
+    nextArrow.disabled = false;
+    nextArrow.classList.remove("fadeOut");
+    nextArrow.classList.remove("hidden");
+    nextArrow.classList.add("fadeIn");
+  } else {
+    nextArrow.disabled = true;
+    nextArrow.classList.remove("fadeIn");
+    nextArrow.classList.add("fadeOut");
+    setTimeout(function() {nextArrow.classList.add("hidden")}, 750);
+  }
+}
+
+function manageBackArrow(isNeeded) {
+  if (isNeeded) {
+    backArrow.disabled = false;
+    backArrow.classList.remove("fadeOut");
+    backArrow.classList.remove("hidden");
+    backArrow.classList.add("fadeIn");
+  } else {
+    backArrow.disabled = true;
+    backArrow.classList.remove("fadeIn");
+    backArrow.classList.add("fadeOut");
+    setTimeout(function() {backArrow.classList.add("hidden")}, 750);
   }
 }
 
@@ -230,30 +270,4 @@ function updatehtml(array, i, favorite, starred) {
   }
 }
 
-function manageNextArrow(isNeeded) {
-  if (isNeeded) {
-    nextArrow.disabled = false;
-    nextArrow.classList.remove("fadeOut");
-    nextArrow.classList.remove("hidden");
-    nextArrow.classList.add("fadeIn");
-  } else {
-    nextArrow.disabled = true;
-    nextArrow.classList.remove("fadeIn");
-    nextArrow.classList.add("fadeOut");
-    setTimeout(function() {nextArrow.classList.add("hidden")}, 750);
-  }
-}
 
-function manageBackArrow(isNeeded) {
-  if (isNeeded) {
-    backArrow.disabled = false;
-    backArrow.classList.remove("fadeOut");
-    backArrow.classList.remove("hidden");
-    backArrow.classList.add("fadeIn");
-  } else {
-    backArrow.disabled = true;
-    backArrow.classList.remove("fadeIn");
-    backArrow.classList.add("fadeOut");
-    setTimeout(function() {backArrow.classList.add("hidden")}, 750);
-  }
-}
