@@ -6,7 +6,6 @@ var nextArrow = document.querySelector("#next-arrow");
 var backArrow = document.querySelector("#back-arrow");
 var filterButton = document.querySelector("#filter");
 
-
 saveButton.addEventListener("click", function (event) {
   event.preventDefault();
   handleSave();
@@ -37,14 +36,12 @@ filterButton.addEventListener("click", handleFilterButton);
 
 document.addEventListener("click", checkStars);
 
-
 var ideas = [];
 var currentShift = 0;
 var favorites = [];
 var filter = false;
 
 saveButton.disabled = true;
-
 
 function checkFields() {
   if (titleField.value && bodyField.value) {
@@ -57,11 +54,11 @@ function checkFields() {
 }
 
 function checkStars() {
-    if (favorites.length > 0) {
-      filterButton.classList.remove('hidden');
-    } else {
-      filterButton.classList.add('hidden');
-    }
+  if (favorites.length > 0) {
+    filterButton.classList.remove("hidden");
+  } else {
+    filterButton.classList.add("hidden");
+  }
 }
 
 function storeIdea() {
@@ -76,24 +73,27 @@ function storeIdea() {
 
 function displayIdeas() {
   ideaGrid.innerHTML = "";
-  // var displayIndexStart = 3
+
   for (var i = 0; i < ideas.length; i++) {
+    console.log(favorites[i]);
+    var index = i + currentShift;
     var favorite = "assets/star.svg";
     var starred = "Unstarred";
     if (i < 3) {
-      if (ideas[i + currentShift].isFavorite) {
+      
+      if (filter) {
         favorite = "assets/star-active.svg";
         starred = "Starred";
-      }
-      if (filter) {
-        if (ideas[i + currentShift].isFavorite) {
-          updatehtml(i, favorite, starred);
-        }
+        updatehtml(favorites, i, favorite, starred);
       } else {
-        updatehtml(i, favorite, starred);
-      }
+        if (ideas[index].isFavorite) {
+            favorite = "assets/star-active.svg";
+            starred = "Starred";
+        }
+        updatehtml(ideas, index, favorite, starred);
     }
   }
+}
   if (ideas.length > 3) {
     nextArrow.disabled = false;
     nextArrow.classList.remove("fadeOut");
@@ -104,7 +104,7 @@ function displayIdeas() {
     nextArrow.disabled = true;
     nextArrow.classList.remove("fadeIn");
     nextArrow.classList.add("fadeOut");
-    setTimeout((nextArrow.classList.add("hidden")), 750);
+    setTimeout(nextArrow.classList.add("hidden"), 750);
   }
   if (currentShift > 0) {
     backArrow.disabled = false;
@@ -115,7 +115,7 @@ function displayIdeas() {
     backArrow.disabled = true;
     backArrow.classList.remove("fadeIn");
     backArrow.classList.add("fadeOut");
-    setTimeout((backArrow.classList.add("hidden")), 750);
+    setTimeout(backArrow.classList.add("hidden"), 750);
   }
 }
 
@@ -146,8 +146,8 @@ function deleteCard(iD) {
   for (var i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
       ideas.splice(i, 1);
-      if (ideas.length > 2){
-        currentShift --;
+      if (ideas.length > 2) {
+        currentShift--;
       }
       displayIdeas();
     }
@@ -155,7 +155,7 @@ function deleteCard(iD) {
   for (var i = 0; i < favorites.length; i++) {
     if (favorites[i].id === iD) {
       favorites.splice(i, 1);
-      if (filter && favorites.length === 0){
+      if (filter && favorites.length === 0) {
         filter = false;
         displayIdeas();
       }
@@ -169,7 +169,7 @@ function updateFavs(cardId) {
     if (ideas[i].id === iD) {
       if (ideas[i].isFavorite) {
         ideas[i].isFavorite = false;
-        for (x = 0; x < favorites.length; x++){
+        for (x = 0; x < favorites.length; x++) {
           favorites.splice(x, 1);
         }
       } else {
@@ -187,7 +187,7 @@ function toggleStar(starId) {
   } else if (starIcon.src.includes("assets/star-active.svg")) {
     starIcon.src = "assets/star.svg";
   }
-  if (filter && favorites.length === 0){
+  if (filter && favorites.length === 0) {
     // filter = false;
     filterIdeas();
   }
@@ -201,6 +201,15 @@ function filterIdeas() {
   } else {
     filterButton.innerHTML = "Show Starred Ideas";
   }
+  /*
+  backArrow.disabled = true;
+  backArrow.classList.remove("fadeIn");
+  backArrow.classList.add("fadeOut");
+  nextArrow.disabled = true;
+  nextArrow.classList.remove("fadeIn");
+  nextArrow.classList.add("fadeOut");
+  we have to maek the arrows go away whwen you clikc the filter button otherwise they mess things up
+  */
 }
 
 function handleFilterButton() {
@@ -208,15 +217,15 @@ function handleFilterButton() {
   displayIdeas();
 }
 
-function updatehtml(i, favorite, starred) {
+function updatehtml(array, i, favorite, starred) {
   ideaGrid.innerHTML += `<div class="card">
-    <div class="delete-box" id="${ideas[i + currentShift].id}">
+    <div class="delete-box" id="${array[i].id}">
         <img class = "fav-button clickables" id="${
-          ideas[i + currentShift].id + 1
+          array[i].id + 1
         }" src = "${favorite}" alt = "${starred}">
         <img class="delete-button clickables" src="assets/delete.svg" alt="delete button">
     </div>
-    <h2 class="card-title">${ideas[i + currentShift].title}</h2>
-    <p class="card-body">${ideas[i + currentShift].body}</p>
+    <h2 class="card-title">${array[i].title}</h2>
+    <p class="card-body">${array[i].body}</p>
 </div>`;
 }
