@@ -68,12 +68,11 @@ function storeIdea() {
     id: Date.now(),
     isFavorite: false,
   };
-  ideas.push(newIdea);
+  ideas.unshift(newIdea);
 }
 
 function displayIdeas() {
   ideaGrid.innerHTML = "";
-
   for (var i = 0; i < ideas.length; i++) {
     var index = i + currentShift;
     var favorite = "assets/star.svg";
@@ -82,7 +81,7 @@ function displayIdeas() {
       if (filter) {
         favorite = "assets/star-active.svg";
         starred = "Starred";
-        updatehtml(favorites, i, favorite, starred);
+        updatehtml(favorites, index, favorite, starred);
       } else {
         if (ideas[index].isFavorite) {
           favorite = "assets/star-active.svg";
@@ -92,10 +91,18 @@ function displayIdeas() {
       }
     }
   }
-
   if (filter) {
-    manageNextArrow(false);
-    manageBackArrow(false);
+    if (favorites.length > 3) {
+      manageNextArrow(true);
+    }
+    if (favorites.length - currentShift < 4) {
+      manageNextArrow(false);
+    }
+    if (currentShift > 0) {
+      manageBackArrow(true);
+    } else if (currentShift === 0) {
+      manageBackArrow(false);
+    }
   } else {
     if (ideas.length > 3) {
       manageNextArrow(true);
@@ -138,10 +145,13 @@ function deleteCard(iD) {
   for (var i = 0; i < ideas.length; i++) {
     if (ideas[i].id === iD) {
       ideas.splice(i, 1);
-      if (ideas.length > 2) {
+      if (currentShift){
         currentShift--;
       }
-      displayIdeas();
+      // if (ideas.length > 2) {
+        // currentShift--;
+      // }
+      // displayIdeas();
     }
   }
   for (var i = 0; i < favorites.length; i++) {
@@ -149,10 +159,11 @@ function deleteCard(iD) {
       favorites.splice(i, 1);
       if (filter && favorites.length === 0) {
         filter = false;
-        displayIdeas();
+        // displayIdeas();
       }
     }
   }
+  displayIdeas();
 }
 
 function updateFavs(cardId) {
@@ -166,7 +177,7 @@ function updateFavs(cardId) {
         }
       } else {
         ideas[i].isFavorite = true;
-        favorites.push(ideas[i]);
+        favorites.unshift(ideas[i]);
       }
     }
   }
@@ -180,10 +191,13 @@ function toggleStar(starId) {
     starIcon.src = "assets/star.svg";
   }
   if (filter && favorites.length === 0) {
-    // filter = false;
     filterIdeas();
   }
   displayIdeas();
+}
+
+function currentShiftReset() {
+  currentShift = 0;
 }
 
 function filterIdeas() {
@@ -196,6 +210,7 @@ function filterIdeas() {
 }
 
 function handleFilterButton() {
+  currentShiftReset();
   filterIdeas();
   displayIdeas();
 }
@@ -214,8 +229,9 @@ function updatehtml(array, i, favorite, starred) {
       </div>`;
   }
 }
-function manageNextArrow(next) {
-  if (next) {
+
+function manageNextArrow(isNeeded) {
+  if (isNeeded) {
     nextArrow.disabled = false;
     nextArrow.classList.remove("fadeOut");
     nextArrow.classList.remove("hidden");
@@ -224,11 +240,12 @@ function manageNextArrow(next) {
     nextArrow.disabled = true;
     nextArrow.classList.remove("fadeIn");
     nextArrow.classList.add("fadeOut");
-    setTimeout(nextArrow.classList.add("hidden"), 750);
+    setTimeout(function() {nextArrow.classList.add("hidden")}, 750);
   }
 }
-function manageBackArrow(back) {
-  if (back) {
+
+function manageBackArrow(isNeeded) {
+  if (isNeeded) {
     backArrow.disabled = false;
     backArrow.classList.remove("fadeOut");
     backArrow.classList.remove("hidden");
@@ -237,6 +254,6 @@ function manageBackArrow(back) {
     backArrow.disabled = true;
     backArrow.classList.remove("fadeIn");
     backArrow.classList.add("fadeOut");
-    setTimeout(backArrow.classList.add("hidden"), 750);
+    setTimeout(function() {backArrow.classList.add("hidden")}, 750);
   }
 }
