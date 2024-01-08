@@ -6,6 +6,7 @@ var nextArrow = document.querySelector("#next-arrow");
 var backArrow = document.querySelector("#back-arrow");
 var filterButton = document.querySelector("#filter");
 
+
 saveButton.addEventListener("click", function (event) {
   event.preventDefault();
   handleSave();
@@ -36,12 +37,13 @@ filterButton.addEventListener("click", handleFilterButton);
 
 document.addEventListener("click", checkStars);
 
+
 var ideas = [];
 var currentShift = 0;
 var favorites = [];
 var filter = false;
-
 saveButton.disabled = true;
+
 
 function checkFields() {
   if (titleField.value && bodyField.value) {
@@ -87,7 +89,7 @@ function displayIdeas() {
           favorite = "assets/star-active.svg";
           starred = "Starred";
         }
-        updatehtml(ideas, index, favorite, starred);
+      updatehtml(ideas, index, favorite, starred);
       }
     }
   }
@@ -137,29 +139,18 @@ function checkArrows() {
 
 function manageNextArrow(isNeeded) {
   if (isNeeded) {
-    nextArrow.disabled = false;
-    nextArrow.classList.remove("fadeOut");
     nextArrow.classList.remove("hidden");
-    nextArrow.classList.add("fadeIn");
   } else {
     nextArrow.disabled = true;
-    nextArrow.classList.remove("fadeIn");
-    nextArrow.classList.add("fadeOut");
-    setTimeout(function() {nextArrow.classList.add("hidden")}, 750);
+    nextArrow.classList.add("hidden")
   }
 }
 
 function manageBackArrow(isNeeded) {
   if (isNeeded) {
-    backArrow.disabled = false;
-    backArrow.classList.remove("fadeOut");
     backArrow.classList.remove("hidden");
-    backArrow.classList.add("fadeIn");
   } else {
-    backArrow.disabled = true;
-    backArrow.classList.remove("fadeIn");
-    backArrow.classList.add("fadeOut");
-    setTimeout(function() {backArrow.classList.add("hidden")}, 750);
+    backArrow.classList.add("hidden")
   }
 }
 
@@ -215,6 +206,10 @@ function updateFavs(cardId) {
         for (x = 0; x < favorites.length; x++) {
           if (favorites[x].id === iD) {
             favorites.splice(x, 1);
+            if (currentShift) {
+              currentShift--;
+            }
+            displayIdeas();
           }
         }
       } else {
@@ -256,5 +251,3 @@ function handleFilterButton() {
   filterIdeas();
   displayIdeas();
 }
-
-
