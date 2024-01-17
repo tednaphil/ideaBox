@@ -26,7 +26,7 @@ We built an interface to create, store, and organize new ideas!</br>
 
 ## Context
 - Completing 4 iterations and bug fixes took about 12 hours of work time including research
-- All contributors are 4 weeks into Mod 1 of the Turing Front End Engineering program
+- All contributors are 4 weeks into learning JavaScript, HTML, and CSS in the Turing Front End Engineering program
   
 ## Learning Goals
 - Gain understanding of how to write clean HTML and CSS to match a provided comp
